@@ -1,0 +1,7 @@
+{
+  "name": "grosse-patate.nvim",
+  "version": "1.0.0",
+  "dependencies": {
+    "ts-morph": "^15.0.0"
+  }
+}
