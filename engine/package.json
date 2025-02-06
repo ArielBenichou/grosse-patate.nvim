@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "dependencies": {
     "ts-morph": "^15.0.0"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1"
   }
 }

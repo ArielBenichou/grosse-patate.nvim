@@ -22,7 +22,7 @@
   dependencies = {
     "jose-elias-alvarez/null-ls.nvim",
   },
-  build = "cd engine && npm install",
+  build = "cd engine && npm install && npm run build",
   config = function()
     require("grosse-patate").setup()
   end,

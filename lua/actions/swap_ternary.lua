@@ -12,21 +12,20 @@ M.setup_swap_ternary = function()
   local name = "swap-ternary"
 
   local swapTernaryFn = function(params)
-    local lines = get_selected_line(params).lines
-    local start_line = get_selected_line(params).start_line
-    local end_line = get_selected_line(params).end_line
-
-    local code = table.concat(lines, "\n")
-
-    local new_lines = perform_swap_ternary(code)
-    if not new_lines then
-      return nil
-    end
-
     return {
       {
         title = name,
         action = function()
+          local lines = get_selected_line(params).lines
+          local start_line = get_selected_line(params).start_line
+          local end_line = get_selected_line(params).end_line
+
+          local code = table.concat(lines, "\n")
+
+          local new_lines = perform_swap_ternary(code)
+          if not new_lines then
+            return nil
+          end
           vim.api.nvim_buf_set_lines(params.bufnr, start_line, end_line + 1, false, new_lines)
         end,
       },

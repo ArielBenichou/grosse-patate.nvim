@@ -4,7 +4,8 @@ local null_ls = require("null-ls")
 
 M.get_engine_path = function(file)
   local source = debug.getinfo(1, "S").source
-  return source:sub(2):match("(.*/)") .. "../engine/" .. file
+  local dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h")
+  return dir .. "/../engine/dist/actions/" .. file
 end
 
 M.execute_code = function(file, code)
