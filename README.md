@@ -11,3 +11,17 @@
 <img alt="Grosse Patate" src="./assets/icon.png" />
 
 </div>
+
+## Installation
+
+- install using `lazy.nvim`:
+
+```
+{
+  "ArielBenichou/grosse-patate.nvim",
+  config = function()
+    require("grosse-patate").setup()
+  end,
+  cmd = { "TsRefactorSwapTernary" },
+}
+```
