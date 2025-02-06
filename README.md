@@ -16,12 +16,15 @@
 
 - install using `lazy.nvim`:
 
-```
+```lua
 {
   "ArielBenichou/grosse-patate.nvim",
+  dependencies = {
+    "jose-elias-alvarez/null-ls.nvim",
+  },
+  build = "cd engine && npm install",
   config = function()
     require("grosse-patate").setup()
   end,
-  cmd = { "TsRefactorSwapTernary" },
 }
 ```
