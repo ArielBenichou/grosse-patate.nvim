@@ -4,12 +4,8 @@ local execute_code = require("utils").execute_code
 local get_selected_line = require("utils").get_selected_line
 local create_null_ls_generator = require("utils").create_null_ls_generator
 
-local function perform_swap_ternary(code)
-  return execute_code("swap-ternary.js", code)
-end
-
 M.setup = function()
-  local name = "swap-ternary"
+  local name = "wrap-try-catch"
 
   local swapTernaryFn = function(params)
     return {
@@ -22,7 +18,7 @@ M.setup = function()
 
           local code = table.concat(lines, "\n")
 
-          local new_lines = perform_swap_ternary(code)
+          local new_lines = execute_code("wrap-try-catch.js", code)
           if not new_lines then
             return nil
           end

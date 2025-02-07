@@ -1,31 +1,19 @@
-import { Project, type ConditionalExpression } from "ts-morph";
+import { type SourceFile } from "ts-morph";
+import { isConditionalExpression } from "../types/ast";
+import { processStdin } from "../utils/std";
 
-// Read input from stdin
-let input = "";
-process.stdin.setEncoding("utf8");
-process.stdin.on("data", (chunk) => (input += chunk));
-process.stdin.on("end", () => {
-  // Create an in-memory project and source file
-  const project = new Project({ useInMemoryFileSystem: true });
-  const sourceFile = project.createSourceFile("temp.ts", input);
-
-  // Traverse the AST to find conditional (ternary) expressions
+export function swapConditionalBranches(sourceFile: SourceFile): void {
   sourceFile.forEachDescendant((node) => {
     if (isConditionalExpression(node)) {
-      const condition = node.getCondition().getText();
       const whenTrue = node.getWhenTrue().getText();
       const whenFalse = node.getWhenFalse().getText();
 
-      // Swap the branches: set whenTrue to whenFalse and vice versa
       node.getWhenTrue().replaceWithText(whenFalse);
       node.getWhenFalse().replaceWithText(whenTrue);
     }
   });
+}
 
-  // Output the refactored code
-  process.stdout.write(sourceFile.getFullText());
-});
-
-function isConditionalExpression(node: any): node is ConditionalExpression {
-  return node.getKindName() === "ConditionalExpression";
+if (require.main === module) {
+  processStdin(swapConditionalBranches);
 }

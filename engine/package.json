@@ -5,7 +5,8 @@
     "ts-morph": "^15.0.0"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "@types/node": "^22.13.1"
