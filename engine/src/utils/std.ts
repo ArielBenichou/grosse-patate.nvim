@@ -1,4 +1,5 @@
 import { Project, SourceFile } from "ts-morph";
+import prettier from "prettier";
 
 function readStdin(): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -10,13 +11,31 @@ function readStdin(): Promise<string> {
   });
 }
 
+function addIndent(input: string, text: string) {
+  const indent = input.match(/^\s*/)?.[0] || "";
+  return text
+    .split("\n")
+    .map((line) => (line ? indent + line : ""))
+    .join("\n");
+}
+
+function addFormatting(text: string) {
+  return prettier.format(text, { parser: "typescript" });
+}
+
 export async function processStdin(
   transform: (sourceFile: SourceFile) => Promise<void> | void,
 ) {
   const input = await readStdin();
   const project = new Project({ useInMemoryFileSystem: true });
+
   const sourceFile = project.createSourceFile("temp.ts", input);
 
   await transform(sourceFile);
-  process.stdout.write(sourceFile.getFullText());
+  let text = sourceFile.getFullText();
+
+  text = await addFormatting(text);
+  text = addIndent(input, text);
+
+  process.stdout.write(text);
 }
