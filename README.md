@@ -12,9 +12,28 @@
 
 </div>
 
+## Overview
+
+Grosse Patate is a lightweight Neovim plugin here to make your coding experience more enjoyable. Built with Lua and backed by NodeJS and Null LS, it takes care of those repetitive tasks so you can focus on what you love. Whether you're tidying up code or squashing errors, Grosse Patate has got you covered.
+
+
+## Features
+
+**Utility Scripts:**
+  - **swap-ternary.ts:** Easily swap the branches of ternary expressions to quickly adjust conditional logic.
+  - **wrap-try-catch.ts:** Automatically wrap code blocks in try-catch statements for improved error handling.
+
 ## Installation
 
-- install using `lazy.nvim`:
+### Prerequisites
+
+- [Neovim 0.8+](https://neovim.io)
+- [Lua](http://www.lua.org)
+- [NodeJS](https://nodejs.org)
+
+### Using `lazy.nvim`
+
+Add the following snippet to your Neovim configuration to install Grosse Patate:
 
 ```lua
 {
@@ -27,4 +46,4 @@
     require("grosse-patate").setup()
   end,
 }
-```
+
